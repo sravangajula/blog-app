@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+<p><b>Title:</b> <%= @post.title %></p>
+<p><b>Body : </b><%= @post.body %></p>
+<% if @post.reload.comments.count > 0 %>
+<p>Comments:</p>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter.inspect %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body.inspect %>
+  </p>
+  <p>
+  	<%= link_to 'Delete', [comment.post, comment], :method => :delete, :data => {:confirm => 'are u sure?'} %>
+  </p>
+  
+<% end %>
+<%end%>
+
+<p>Add Comments: </p>
+
+<%= form_for([@post, @post.comments.new]) do|f|%>
+  <% if @comment && @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<p>User name:<%= f.text_field :commenter %></p>
+<p>Comment:</p>
+<p><%= f.text_area :body, :rows => 5, :cols => 10 %></p>
+<p><%= f.submit %></p>
+
+<%end%>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
