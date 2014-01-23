@@ -20,7 +20,7 @@
 <% end %>
 <%end%>
 
-<p>Add Comments: </p>
+<p><strong>Add Comment:</strong> </p>
 
 <%= form_for([@post, @post.comments.new]) do|f|%>
   <% if @comment && @comment.errors.any? %>
