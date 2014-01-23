@@ -8,14 +8,31 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-#username: root
-#password: root
-#host: 127.0.0.1
+#development:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  database: blog-app_development
+#  pool: 5
+#  username: root
+#  password: root
+#  host: 127.0.0.1
 
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: blog-app_development
+  pool: 5
+  
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: blog-app_test
+  pool: 5
+  
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: blog-app_production
   pool: 5
   
