@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 <p><b>Title:</b> <%= @post.title %></p>
 <p><b>Body : </b><%= @post.body %></p>
-<% if @post.reload.comments.count > 0 %>
-<p>Comments:</p>
+<% if @post.comments.count > 0 %>
+<p><strong><u>User Comments:</u></strong></p>
 <% @post.comments.each do |comment| %>
   <p>
     <strong>Commenter:</strong>
-    <%= comment.commenter.inspect %>
+    <%= comment.commenter %>
   </p>
  
   <p>
     <strong>Comment:</strong>
-    <%= comment.body.inspect %>
+    <%= comment.body %>
   </p>
   <p>
   	<%= link_to 'Delete', [comment.post, comment], :method => :delete, :data => {:confirm => 'are u sure?'} %>
@@ -22,7 +22,7 @@
 
 <p><strong>Add Comment:</strong> </p>
 
-<%= form_for([@post, @post.comments.new]) do|f|%>
+<%= form_for([@post, @post.comments.build]) do|f|%>
   <% if @comment && @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -33,9 +33,10 @@
       </ul>
     </div>
   <% end %>
-<p>User name:<%= f.text_field :commenter %></p>
+  
+<p>User name:<%= f.text_field :commenter, :value => @comment.nil? ? nil : @comment.commenter %></p>
 <p>Comment:</p>
-<p><%= f.text_area :body, :rows => 5, :cols => 10 %></p>
+<p><%= f.text_area :body, :rows => 5, :cols => 10, :value => @comment.nil? ? nil : @comment.body %></p>
 <p><%= f.submit %></p>
 
 <%end%>

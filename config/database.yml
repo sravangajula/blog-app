@@ -23,16 +23,25 @@ development:
   encoding: unicode
   database: blog-app_development
   pool: 5
+  username: postgres
+  password: root
+  host: localhost
   
 test:
   adapter: postgresql
   encoding: unicode
   database: blog-app_test
   pool: 5
+  username: postgres
+  password: root
+  host: localhost
   
 production:
   adapter: postgresql
   encoding: unicode
   database: blog-app_production
   pool: 5
+  username: postgres
+  password: root
+  host: localhost
   
