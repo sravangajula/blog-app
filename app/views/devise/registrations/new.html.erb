@@ -12,6 +12,15 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+ <% if current_user and current_user.role? :admin %>
+  <% for role in Role.find(:all) %>
+    <div>
+      <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+      <%= role.name %>
+    </div>
+  <% end %>
+  <% end %>
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 

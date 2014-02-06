@@ -1,8 +1,16 @@
 BlogApp::Application.routes.draw do
-  devise_for :users
+  resources :roles
 
-  resources :comments
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
 
+  resources :users do 
+    member do
+     get :edit_password
+     put :update_password
+    end 
+  end 
+#  resources :comments
+ 
 
   resources :posts do
     resources :comments
