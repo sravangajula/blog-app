@@ -6,12 +6,17 @@ gem 'rails', '3.2.16'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'mysql2'
+gem 'thin'
 gem 'pg'
 gem 'nifty-generators'
 gem 'devise'
 gem 'sass'
 gem 'cancan'
-
+gem 'angular-gem'
+gem 'bullet'
+gem 'angular_rails_csrf'
+gem 'angular-ui-bootstrap-rails'
+ 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

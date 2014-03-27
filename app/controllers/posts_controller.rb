@@ -4,8 +4,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-
+    @posts = Post.comments_count
+    
+    logger.info "="*30
+    logger.info @posts.inspect
+    logger.info "="*30
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -15,9 +19,10 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
-   
-  
+    @post = Post.includes(:comments).find(params[:id])
+    @post = @post.as_json(:include => {
+                               :comments => {:only => [:body,:commenter]} 
+                               })
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
