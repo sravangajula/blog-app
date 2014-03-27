@@ -1,0 +1,23 @@
+<h1>Angular - Listing posts</h1>
+
+<table>
+   <tr>
+
+     <th>Title</th>
+     <th>Body</th>
+     <th>Comments Count</th>
+     <th colspan="4">Action</th> 
+   </tr>
+
+	<tr ng-repeat="post in posts">
+
+	  <td><a  ng-click="showPost(post.id)">{{post.id}} - {{ post.title }}</a></td>
+	  <td>{{ post.body }}</td>
+	  <td>{{ post.comments_count }}</td>
+	    <td><a ng-click="showPost(post.id)" >Show</a> </td>
+		<td><a ng-click="editPost(post.id)" >Edit</a> </td>
+		<td><a href="#" >Delete</a> </td>
+	  
+	    
+	</tr>
+</table>

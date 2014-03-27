@@ -1,0 +1,32 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Comments Count</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+  	<td><%= post.title %></td>
+	<td><%= post.body %></td>
+	<td><%= post.comments.count %></td>
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %> |
+<%= link_to 'Manage Users', users_path if current_user.role? :admin%>
+
+<div ng-controller="PostIndexCtrl">
+<a href="/#">Anguale Post index</a>
+<ul ng-repeat="post in all_posts">
+  <li><a ng-click="alert(post.id)">{{ post.name }}</a></li>
+</ul>
+</div>
